@@ -21,8 +21,8 @@ game.createRocket = (centerX, centerY, imgSrc, gravityDelta, context) => {
     image: './assets/fire.png',
     center: {x: centerX, y: centerY},
     size: {mean: 10, stdev: 3},
-    speed: { mean: 0, stdev: 0.2},
-    lifetime: { mean: 1000, stdev: 250}
+    speed: { mean: 0, stdev: 0.1},
+    lifetime: { mean: 500, stdev: 100}
   });
   rocket.gravity = gravityDelta;
   rocket.context = context;

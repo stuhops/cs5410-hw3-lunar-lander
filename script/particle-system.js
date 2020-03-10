@@ -45,8 +45,8 @@ function ParticleSystem(graphics, spec) {
                 center: { x: spec.center.x, y: spec.center.y },
                 size: {x: size, y: size},
                 rotation: 0,
-                speed: Random.nextGaussian(spec.speed.mean, spec.speed.stdev),
-                direction: Random.nextCircleVector(),
+                speed: Math.abs(Random.nextGaussian(spec.speed.mean, spec.speed.stdev)),
+                direction: Random.nextThrustVector(),
                 lifetime: Random.nextGaussian(spec.lifetime.mean, spec.lifetime.stdev)
             });
             particles.push(p);
