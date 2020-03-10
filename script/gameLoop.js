@@ -3,9 +3,17 @@ game.gameLoop = function() {
 
   function processInput() {
     game.rocket.setThrust(false);
+    game.rocket.setRotate(0);
+
     for(input in inputBuffer) {
       if(input == game.up) {
         game.rocket.setThrust(true);
+      }
+      if(input == game.left) {
+        game.rocket.setRotate(-1);
+      }
+      if(input == game.right) {
+        game.rocket.setRotate(1);
       }
     }
   }

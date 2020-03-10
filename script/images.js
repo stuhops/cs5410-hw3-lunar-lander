@@ -13,7 +13,7 @@ let renderImage = (img, context) => {
   if (img.isReady) {
     context.save();
     context.translate(img.center.x, img.center.y);
-    context.rotate(img.rotation);
+    context.rotate(img.angle);
     context.translate(-img.center.x, -img.center.y);
     context.drawImage(
       img,
