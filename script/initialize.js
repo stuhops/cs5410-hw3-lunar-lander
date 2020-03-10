@@ -27,8 +27,9 @@ let game = {
   imgRocket: './assets/rocket.png',
 };
 
-
 let newGame = (game) => {
+
+
   game.rocket = game.createRocket(game.gameWidth / 2, 100, game.imgRocket, game.gravityAcc, context);
   game.gameLoop.start();
 }

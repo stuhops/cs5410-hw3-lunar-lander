@@ -23,7 +23,7 @@ game.gameLoop = function() {
     game.rocket.update(elapsedTime);
 
     if(game.rocket.getCenter().y > 1024) {
-      game.gameOver = true;
+      // game.gameOver = true;
     }
   }
 

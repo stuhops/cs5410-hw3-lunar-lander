@@ -17,13 +17,20 @@ game.createRocket = (centerX, centerY, imgSrc, gravityDelta, context) => {
     y: 0,
   };
   rocket.thrust = false;
+  rocket.thrustVis = ParticleSystem(game.graphics, {
+    image: './assets/fire.png',
+    center: {x: centerX, y: centerY},
+    size: {mean: 10, stdev: 3},
+    speed: { mean: 0, stdev: 0.2},
+    lifetime: { mean: 1000, stdev: 250}
+  });
   rocket.gravity = gravityDelta;
   rocket.context = context;
 
 
+
   function rotate_(elapsedTime) {
     rocket.angle += elapsedTime * rocket.rotate.speed * rocket.rotate.direction;
-    console.log(rocket.angle);
   }
 
 
@@ -53,14 +60,16 @@ game.createRocket = (centerX, centerY, imgSrc, gravityDelta, context) => {
     rotate_(elapsedTime);
     thrust_(elapsedTime);
 
+    rocket.thrustVis.update(elapsedTime);
+
     rocket.center.x += rocket.velocity.x; 
     rocket.center.y += rocket.velocity.y; 
   }
 
 
   function render() {
-    // context.drawImage(rocket, rocket.center.x, rocket.center.y, rocket.width, rocket.height);
-    renderImage(rocket, context);
+    // renderImage(rocket, context);
+    rocket.thrustVis.render();
   }
 
   
