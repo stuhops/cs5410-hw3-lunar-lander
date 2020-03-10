@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Game Loop</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body class="bg-dark" onload="newGame(game)">
+  <div id="game">
+
+    <div id="game-play" class="screen active">
+      <div class="d-flex justify-content-around bg-secondary">
+        <div class="p-2">Your Score: 
+          <span id="my-score"></span>
+        </div>
+        <div class="p-2">High Score: 
+          <span name="high-score"></span>
+        </div>
+        <div class="p-2">Time: 
+          <span id="timer"></span>
+        </div>
+      </div>
+      <canvas id="canvas-main" width="1024" height="1024"></canvas>
+      <button class="btn w-100 btn-secondary" onClick="navigate('main-menu');">Main Menu</button>"
+    </div>
+
+  </div>
+
+  <script src="./script/initialize.js"></script>
+  <script src="./script/gameLoop.js"></script>
+  <script src="./script/images.js"></script>
+  <script src="./script/rocket.js"></script>
+
+</body>
+</html>
