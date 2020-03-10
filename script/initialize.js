@@ -16,6 +16,6 @@ let game = {
 
 
 let newGame = (game) => {
-  game.rocket = game.createRocket(game.gameWidth / 2, game.gameHeight / 2, game.imgRocket, game.gravityAcc);
+  game.rocket = game.createRocket(game.gameWidth / 2, 5, game.imgRocket, game.gravityAcc);
   game.gameLoop.start();
 }

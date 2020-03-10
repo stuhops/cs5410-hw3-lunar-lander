@@ -16,6 +16,9 @@ game.createRocket = (posX, posY, imgSrc, gravityDelta, context) => {
   };
 
 
+  rocket.img.width = 40;
+  rocket.img.height = 80;
+
   function rotate_(elapsedTime, direction) {
     return rocket.angle;
   }
@@ -39,7 +42,7 @@ game.createRocket = (posX, posY, imgSrc, gravityDelta, context) => {
     // rotate_(elapsedTime, rotate);
     // thrust_(elapsedTime, thrust);
 
-    context.drawImage(rocket.img, 0, 0);
+    context.drawImage(rocket.img, rocket.pos.x, rocket.pos.y, rocket.img.width, rocket.img.height);
     
 
     return rocket;
