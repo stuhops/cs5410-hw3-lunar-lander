@@ -17,7 +17,7 @@ let game = {
   context: context,
 
   // ---------- Game State -------------
-  level: 1,
+  level: 2,
   gameOver: false,
 
   // ---------- Game Vars --------------

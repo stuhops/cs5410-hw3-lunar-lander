@@ -14,29 +14,71 @@ game.createTerrain = (game) => {
     terrain.map.push({x: 0, y: terrain.start})
 
     let landing1 = {
-      x: Math.floor(Math.random() * (detail - 4) / 2),
-      y: Random.nextGaussian(terrain.map[i-1].y, terrain.stdDev),
+      x: Math.floor(Math.random() * (terrain.detail - terrain.detail/5) / 2 + 1),
+      y: Random.nextGaussian(2 * game.gameHeight / 3, terrain.stdDev / 2),
       landingZone: true,
     }
     let landing2 = {
-      x: Math.floor(Math.random() * detail / 2 + detail / 2),
-      y: Random.nextGaussian(terrain.map[i-1].y, terrain.stdDev),
+      x: Math.floor(Math.random() * terrain.detail / 2 + (terrain.detail) / 2),
+      y: Random.nextGaussian(2 * game.gameHeight / 3, terrain.stdDev / 2),
       landingZone: true,
     }
 
     let next; 
     for(let i = 1; i < terrain.detail; i++) {
-      while(true) {
-        next = Random.nextGaussian(terrain.map[i-1].y, terrain.stdDev);
-        if(next > terrain.min && next < terrain.max)
-          break;
+      if(i == landing1.x) {
+        for(let j = 0; j < Math.floor(terrain.detail/5); j++) {
+          terrain.map.push({x: (i+j)*terrain.spacing, y: landing1.y, landingZone: true, landing: 1});
+        }
+        i += Math.floor(terrain.detail/5) - 1;
       }
-      terrain.map.push({x: i*terrain.spacing, y: next, landingZone: false});
+      else if(i == landing2.x) {
+        for(let j = 0; j < Math.floor(terrain.detail/5); j++) {
+          terrain.map.push({x: (i+j)*terrain.spacing, y: landing2.y, landingZone: true, landing: 2});
+        }
+        i += Math.floor(terrain.detail/5) - 1;
+      }
+      else {
+        while(true) {
+          next = Random.nextGaussian(terrain.map[i-1].y, terrain.stdDev);
+          if(next > terrain.min && next < terrain.max)
+            break;
+        }
+        terrain.map.push({x: i*terrain.spacing, y: next, landingZone: false});
+      }
     }
     console.log(terrain.map);
    }
 
-  if(game.level === 2) { }
+  if(game.level === 2) {
+    terrain.spacing = game.gameWidth / terrain.detail;
+    terrain.map.push({x: 0, y: terrain.start})
+
+    let landing = {
+      x: Math.floor(Math.random() * (terrain.detail - terrain.detail/5)),
+      y: Random.nextGaussian(2 * game.gameHeight / 3, terrain.stdDev / 2),
+      landingZone: true,
+    }
+
+    let next; 
+    for(let i = 1; i < terrain.detail; i++) {
+      if(i == landing.x) {
+        for(let j = 0; j < Math.floor(terrain.detail/6); j++) {
+          terrain.map.push({x: (i+j)*terrain.spacing, y: landing.y, landingZone: true});
+        }
+        i += Math.floor(terrain.detail/6) - 1;
+      }
+      else {
+        while(true) {
+          next = Random.nextGaussian(terrain.map[i-1].y, terrain.stdDev);
+          if(next > terrain.min && next < terrain.max)
+            break;
+        }
+        terrain.map.push({x: i*terrain.spacing, y: next, landingZone: false});
+      }
+    }
+    console.log(terrain.map);
+   }
 
   function render() { 
     context.strokeStyle = 'rgb(255, 255, 255)';
