@@ -3,7 +3,6 @@ let context = canvas.getContext('2d');
 
 let inputBuffer = {};
 window.addEventListener('keydown', function(event) {
-  this.console.log('Hello');
   inputBuffer[event.key] = event.key;
 });
 window.addEventListener('keyup', function(event) {
@@ -16,7 +15,7 @@ let game = {
   canvas: canvas,
   context: context,
 
-  gravityAcc: 0.00001,
+  gravityAcc: 0.001,
 
   // ----------- Controls --------------
   up: 'ArrowUp',

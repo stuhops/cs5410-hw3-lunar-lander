@@ -7,7 +7,7 @@ game.createRocket = (centerX, centerY, imgSrc, gravityDelta, context) => {
     x: centerX,
     y: centerY,
   };
-  rocket.angle = 0;
+  rocket.angle = 1/2 * Math.PI;
   rocket.rotate = 0;
   rocket.velocity = {
     x: 0,
@@ -25,10 +25,10 @@ game.createRocket = (centerX, centerY, imgSrc, gravityDelta, context) => {
 
   function thrust_(elapsedTime) {
     if(rocket.thrust) {
-      let acc = rocket.gravity * 1.5;
+      let acc = rocket.gravity * 3;
       
-      rocket.velocity.x += elapsedTime * acc * Math.sin(rocket.angle);
-      rocket.velocity.y += elapsedTime * acc * Math.cos(rocket.angle);
+      rocket.velocity.x -= elapsedTime * acc * Math.cos(rocket.angle);
+      rocket.velocity.y -= elapsedTime * acc * Math.sin(rocket.angle);
     }
 
     return rocket.velocity;
@@ -45,7 +45,7 @@ game.createRocket = (centerX, centerY, imgSrc, gravityDelta, context) => {
   }
 
 
-  function update(elapsedTime, context) {
+  function update(elapsedTime) {
     rocket.velocity.y += elapsedTime * rocket.gravity; 
 
     // rotate_(elapsedTime, rotate);

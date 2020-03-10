@@ -2,6 +2,7 @@ game.gameLoop = function() {
   let lastTime = performance.now();
 
   function processInput() {
+    game.rocket.setThrust(false);
     for(input in inputBuffer) {
       if(input == game.up) {
         game.rocket.setThrust(true);
@@ -28,6 +29,7 @@ game.gameLoop = function() {
     update(elapsedTime);
     render(elapsedTime);
 
+    lastTime = time;
     requestAnimationFrame(gameLoop);
   }
 
