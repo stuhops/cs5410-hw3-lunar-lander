@@ -17,7 +17,7 @@ let game = {
   context: context,
 
   // ---------- Game State -------------
-  level: 2,
+  level: 1,
   gameOver: false,
 
   // ---------- Game Vars --------------
@@ -35,5 +35,5 @@ let game = {
 let newGame = (game) => {
   game.terrain = game.createTerrain(game);
   game.rocket = game.createRocket(game.gameWidth / 2, 100, game.imgRocket, game.gravityAcc, context);
-  // game.gameLoop.start();
+  game.gameLoop.start();
 }

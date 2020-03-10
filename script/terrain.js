@@ -1,7 +1,7 @@
 game.createTerrain = (game) => {
   let terrain = {
-    detail: 20,
-    stdDev: 200,
+    detail: 200,
+    stdDev: 50,
     min: game.gameHeight / 2,
     max: game.gameHeight,
   }
@@ -47,8 +47,7 @@ game.createTerrain = (game) => {
         terrain.map.push({x: i*terrain.spacing, y: next, landingZone: false});
       }
     }
-    console.log(terrain.map);
-   }
+  }
 
   if(game.level === 2) {
     terrain.spacing = game.gameWidth / terrain.detail;
@@ -77,10 +76,10 @@ game.createTerrain = (game) => {
         terrain.map.push({x: i*terrain.spacing, y: next, landingZone: false});
       }
     }
-    console.log(terrain.map);
-   }
+  }
 
-  function render() { 
+
+  function render(context) { 
     context.strokeStyle = 'rgb(255, 255, 255)';
     context.lineWidth = 6;
     context.moveTo(0, game.gameHeight);
@@ -95,6 +94,8 @@ game.createTerrain = (game) => {
     context.stroke();
   }
 
-  render();
+  return {
+    render: render,
+  }
 
 };

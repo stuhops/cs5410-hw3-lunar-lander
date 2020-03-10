@@ -23,13 +23,14 @@ game.gameLoop = function() {
     game.rocket.update(elapsedTime);
 
     if(game.rocket.getCenter().y > 1024) {
-      // game.gameOver = true;
+      game.gameOver = true;
     }
   }
 
 
   function render() {
     context.clearRect(0, 0, canvas.width, canvas.height);
+    game.terrain.render(context);
     game.rocket.render(context)
   }
 
