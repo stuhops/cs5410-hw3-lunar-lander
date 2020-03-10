@@ -13,6 +13,10 @@ game.gameLoop = function() {
 
   function update(elapsedTime) {
     game.rocket.update(elapsedTime);
+
+    if(game.rocket.getCenter().y > 1024) {
+      game.gameOver = true;
+    }
   }
 
 
@@ -29,8 +33,10 @@ game.gameLoop = function() {
     update(elapsedTime);
     render(elapsedTime);
 
-    lastTime = time;
-    requestAnimationFrame(gameLoop);
+    if(!game.gameOver) {
+      lastTime = time;
+      requestAnimationFrame(gameLoop);
+    }
   }
 
   function startGameLoop() {

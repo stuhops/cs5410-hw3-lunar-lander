@@ -67,7 +67,7 @@ game.createRocket = (centerX, centerY, imgSrc, gravityDelta, context) => {
     render: render,
 
     // -------------------------------  Getters -------------------------------- 
-    // getCenter: () => rocket.center,
+    getCenter: () => rocket.center,
     // getAngle: () => rocket.angle,
     // getVelocity: () => rocket.velocity,
 

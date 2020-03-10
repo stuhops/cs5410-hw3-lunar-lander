@@ -14,6 +14,7 @@ let game = {
   gameWidth: 1024,
   canvas: canvas,
   context: context,
+  gameOver: false,
 
   gravityAcc: 0.001,
 
