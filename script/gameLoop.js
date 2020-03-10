@@ -2,6 +2,11 @@ game.gameLoop = function() {
   let lastTime = performance.now();
 
   function processInput() {
+    for(input in inputBuffer) {
+      if(input == game.up) {
+        game.rocket.setThrust(true);
+      }
+    }
   }
 
 
@@ -11,6 +16,7 @@ game.gameLoop = function() {
 
 
   function render() {
+    context.clearRect(0, 0, canvas.width, canvas.height);
     game.rocket.render(context)
   }
 
