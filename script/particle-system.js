@@ -29,7 +29,7 @@ function ParticleSystem(graphics, spec) {
         return that;
     }
 
-    that.update = function(elapsedTime) {
+    that.update = function(elapsedTime, angle) {
         let keepMe = [];
         for (let particle = 0; particle < particles.length; particle++) {
             if (particles[particle].update(elapsedTime)) {
@@ -46,8 +46,8 @@ function ParticleSystem(graphics, spec) {
                 size: {x: size, y: size},
                 rotation: 0,
                 speed: Math.abs(Random.nextGaussian(spec.speed.mean, spec.speed.stdev)),
-                direction: Random.nextThrustVector(),
-                lifetime: Random.nextGaussian(spec.lifetime.mean, spec.lifetime.stdev)
+                direction: Random.nextThrustVector(angle),
+                lifetime: Random.nextGaussian(spec.lifetime.mean, spec.lifetime.stdev),
             });
             particles.push(p);
         }

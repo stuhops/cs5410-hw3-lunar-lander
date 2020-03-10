@@ -25,14 +25,20 @@ let Random = (function() {
         };
     }
 
-    function nextThrustVector() {
+    function nextThrustVector(rocketAngle) {
         let angle = Math.random() * 1/3 * Math.PI;
+        angle += rocketAngle - 1/6 * Math.PI;
         return {
             x: Math.cos(angle),
             y: Math.sin(angle)
         };
     }
 
+    function nextGaussianPositive(mean, stdDev) {
+        let gaus = nextGaussian(mean, stdDev);
+
+        return Math.abs(gaus);
+    }
     //
     // This is used to give a small performance optimization in generating gaussian random numbers.
     let usePrevious = false;
@@ -75,6 +81,7 @@ let Random = (function() {
         nextRange : nextRange,
         nextCircleVector : nextCircleVector,
         nextThrustVector : nextThrustVector,
+        nextGaussianPositive: nextGaussianPositive,
         nextGaussian : nextGaussian
     };
 
