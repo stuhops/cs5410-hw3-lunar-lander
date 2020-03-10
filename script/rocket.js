@@ -80,14 +80,10 @@ game.createRocket = (centerX, centerY, imgSrc, gravityDelta, context) => {
 
     // -------------------------------  Getters -------------------------------- 
     getCenter: () => rocket.center,
-    // getAngle: () => rocket.angle,
-    // getVelocity: () => rocket.velocity,
+    getCollisionRadius: () => Math.max(rocket.width / 2, rocket.height / 2),
 
     // -------------------------------- Setters -------------------------------- 
     setThrust: setThrust,
     setRotate: setRotate,
-    // setPos: (posX, posY) => { rocket.pos.x = posX; rocket.pos.y = posY; },
-    // setAngle: () => rocket.angle,
-    // setVelocity: (velX, velY) => { rocket.velocity.x = velX; rocket.velocity.y = velY; },
   };
 };

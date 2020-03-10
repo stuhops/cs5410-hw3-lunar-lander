@@ -96,6 +96,7 @@ game.createTerrain = (game) => {
 
   return {
     render: render,
+    terrainMap: terrain.map,
   }
 
 };
