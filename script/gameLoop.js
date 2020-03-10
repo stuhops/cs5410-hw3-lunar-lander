@@ -6,11 +6,12 @@ game.gameLoop = function() {
 
 
   function update(elapsedTime) {
-    game.rocket.update(elapsedTime, context);
+    game.rocket.update(elapsedTime);
   }
 
 
   function render() {
+    game.rocket.render(context)
   }
 
 
