@@ -55,12 +55,12 @@ game.createRocket = (centerX, centerY, imgSrc, gravityDelta, context) => {
 
 
   function update(elapsedTime) {
-    // rocket.velocity.y += elapsedTime * rocket.gravity; 
+    rocket.velocity.y += elapsedTime * rocket.gravity; 
 
     rotate_(elapsedTime);
     thrust_(elapsedTime);
 
-    rocket.thrustVis.update(elapsedTime, rocket.angle);
+    rocket.thrustVis.update(elapsedTime, rocket.center, rocket.angle, rocket.thrust);
 
     rocket.center.x += rocket.velocity.x; 
     rocket.center.y += rocket.velocity.y; 

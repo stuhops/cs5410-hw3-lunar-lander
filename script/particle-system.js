@@ -29,8 +29,12 @@ function ParticleSystem(graphics, spec) {
         return that;
     }
 
-    that.update = function(elapsedTime, angle) {
+    that.update = function(elapsedTime, center, angle, makeNew) {
         let keepMe = [];
+        spec.center = {
+            x: center.x + 30 * Math.cos(angle),
+            y: center.y + 30 * Math.sin(angle),
+        };
         for (let particle = 0; particle < particles.length; particle++) {
             if (particles[particle].update(elapsedTime)) {
                 keepMe.push(particles[particle]);
@@ -38,18 +42,20 @@ function ParticleSystem(graphics, spec) {
         }
         particles = keepMe;
 
-        for (let particle = 0; particle < 5; particle++) {
-            let size = Math.abs(Random.nextGaussian(spec.size.mean, spec.size.stdev));
-            let p = create({
-                image: spec.image,
-                center: { x: spec.center.x, y: spec.center.y },
-                size: {x: size, y: size},
-                rotation: 0,
-                speed: Math.abs(Random.nextGaussian(spec.speed.mean, spec.speed.stdev)),
-                direction: Random.nextThrustVector(angle),
-                lifetime: Random.nextGaussian(spec.lifetime.mean, spec.lifetime.stdev),
-            });
-            particles.push(p);
+        if(makeNew) {
+            for (let particle = 0; particle < 5; particle++) {
+                let size = Math.abs(Random.nextGaussian(spec.size.mean, spec.size.stdev));
+                let p = create({
+                    image: spec.image,
+                    center: { x: spec.center.x, y: spec.center.y },
+                    size: {x: size, y: size},
+                    rotation: 0,
+                    speed: Math.abs(Random.nextGaussian(spec.speed.mean, spec.speed.stdev)),
+                    direction: Random.nextThrustVector(angle),
+                    lifetime: Random.nextGaussian(spec.lifetime.mean, spec.lifetime.stdev),
+                });
+                particles.push(p);
+            }
         }
     };
 
