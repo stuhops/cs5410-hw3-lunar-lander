@@ -20,6 +20,7 @@
       <div class="d-flex justify-content-center">
         <div class="w-50 d-flex flex-column pt-5">
           <button class="btn btn-lg btn-primary mt-5" onClick="navigate('level-selector');">New Game</button>
+          <button class="btn btn-lg btn-primary mt-4" onClick="navigate('settings');">Settings</button>
           <button class="btn btn-lg btn-primary mt-4" onClick="navigate('high-scores');">High Scores</button>
           <button class="btn btn-lg btn-primary mt-4" onClick="navigate('about');">About</button>
         </div>
@@ -28,7 +29,16 @@
 
 
     <div id="settings" class="screen">
-
+      <h1 class="display-2 text-center text-white pt-5">Main Menu</h1>
+      <hr>
+      <div class="d-flex justify-content-center">
+        <div class="w-50 d-flex flex-column pt-5">
+          <button class="btn btn-lg btn-primary mt-5" onClick="game.changeKey('up');">Thrust: <span id="control-up">ArrowUp</span></button>
+          <button class="btn btn-lg btn-primary mt-4" onClick="game.changeKey('left');">Rotate Counter-Clockwise: <span id="control-left">ArrowLeft</span></button>
+          <button class="btn btn-lg btn-primary mt-4" onClick="game.changeKey('right');">Rotate Clockwise: <span id="control-right">ArrowRight</span></button>
+          <button class="btn btn-lg btn-secondary mt-4" onClick="navigate('main-menu');">Back to Main Menu</button>
+        </div>
+      </div>
     </div>
 
 
@@ -150,9 +160,9 @@
   <script src="./script/navigation.js"></script>
   <script src="./script/random.js"></script>
   <script src="./script/particle-system.js"></script>
-  <script src="./script/particle-system-linear.js"></script>
 
   <script src="./script/initialize.js"></script>
+  <script src="./script/settings.js"></script>
   <script src="./script/collision.js"></script>
   <script src="./script/terrain.js"></script>
   <script src="./script/graphics.js"></script>
