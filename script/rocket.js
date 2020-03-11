@@ -26,6 +26,10 @@ game.createRocket = (centerX, centerY, imgSrc, gravityDelta, context) => {
   });
   rocket.gravity = gravityDelta;
   rocket.context = context;
+  rocket.blowUp = {
+    bool: false,
+    timer: 3000,
+  }
 
 
 
@@ -55,21 +59,48 @@ game.createRocket = (centerX, centerY, imgSrc, gravityDelta, context) => {
 
 
   function update(elapsedTime) {
-    rocket.velocity.y += elapsedTime * rocket.gravity; 
+    if(!rocket.blowUp.bool) {
+      rocket.velocity.y += elapsedTime * rocket.gravity; 
 
-    rotate_(elapsedTime);
-    thrust_(elapsedTime);
+      rotate_(elapsedTime);
+      thrust_(elapsedTime);
 
-    rocket.thrustVis.update(elapsedTime, rocket.center, rocket.angle, rocket.thrust);
+      rocket.thrustVis.update(elapsedTime, rocket.center, rocket.angle, rocket.thrust);
 
-    rocket.center.x += rocket.velocity.x; 
-    rocket.center.y += rocket.velocity.y; 
+      rocket.center.x += rocket.velocity.x; 
+      rocket.center.y += rocket.velocity.y; 
+      return true;
+    }
+    else {
+      rocket.blowUp.timer -= elapsedTime;
+      rocket.blowUp.vis.blowUp(elapsedTime, rocket.center, rocket.blowUp.timer > 0);
+      
+      if(rocket.blowUp.timer < 0) return false;
+
+    }
   }
 
 
   function render() {
-    rocket.thrustVis.render();
-    renderImage(rocket, context);
+    if(!rocket.blowUp.bool) {
+      rocket.thrustVis.render();
+      renderImage(rocket, context);
+    }
+    else {
+      rocket.blowUp.vis.render();
+    }
+  }
+
+
+  function startBlowUp() {
+    rocket.blowUp.bool = true;
+    rocket.blowUp.vis = ParticleSystem(game.graphics, {
+      image: './assets/fire.png',
+      center: {x: centerX, y: centerY},
+      size: {mean: 15, stdev: 5},
+      speed: { mean: 0, stdev: 0.002},
+      lifetime: { mean: 500, stdev: 100}
+    });
   }
 
   
@@ -77,6 +108,7 @@ game.createRocket = (centerX, centerY, imgSrc, gravityDelta, context) => {
     // ------------------------------- Functions -------------------------------
     update: update,
     render: render,
+    startBlowUp: startBlowUp,
 
     // -------------------------------  Getters -------------------------------- 
     getCenter: () => rocket.center,

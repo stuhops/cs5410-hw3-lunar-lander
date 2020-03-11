@@ -11,10 +11,97 @@
 
   <link rel="stylesheet" href="./css/style.css">
 </head>
-<body class="bg-dark" onload="newGame(game)">
+<body class="bg-dark">
   <div id="game">
 
-    <div id="game-play" class="screen active">
+    <div id="main-menu" class="screen active">
+      <h1 class="display-2 text-center text-white pt-5">Main Menu</h1>
+      <hr>
+      <div class="d-flex justify-content-center">
+        <div class="w-50 d-flex flex-column pt-5">
+          <button class="btn btn-lg btn-primary mt-5" onClick="navigate('level-selector');">New Game</button>
+          <button class="btn btn-lg btn-primary mt-4" onClick="navigate('high-scores');">High Scores</button>
+          <button class="btn btn-lg btn-primary mt-4" onClick="navigate('about');">About</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div id="settings" class="screen">
+
+    </div>
+
+
+    <div id="level-selector" class="screen">
+      <h1 class="display-2 text-center text-white pt-5">Maze Select</h1>
+      <hr>
+      <div class="d-flex justify-content-center">
+        <div class="w-50 d-flex flex-column pt-5">
+          <button class="btn btn-lg btn-success mt-4" onClick="game.level = 1; navigate('game-play');">Level 1</button>
+          <button class="btn btn-lg btn-warning mt-4" onClick="game.level = 2; navigate('game-play');">Level 2</button>
+          <button class="btn btn-lg btn-secondary mt-4" onClick="navigate('main-menu');">Back to Main Menu</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div id="high-scores" class="screen">
+      <h1 class="display-2 text-center text-white pt-5">High Scores</h1>
+      <hr>
+
+      <div class="d-flex justify-content-center">
+        <div class="w-50 d-flex flex-column pt-5">
+          <div name="high-score-1" class="btn btn-lg btn-success mt-5">Unclaimed</div>
+          <div name="high-score-2" class="btn btn-lg btn-primary mt-4">Unclaimed</div>
+          <div name="high-score-3" class="btn btn-lg btn-warning mt-4">Unclaimed</div>
+          <div name="high-score-4" class="btn btn-lg btn-danger mt-4 mb-5">Unclaimed</div>
+        </div>
+      </div>
+
+      <button class="btn w-100 btn-secondary mt-5" onClick="navigate('main-menu');">Main Menu</button>"
+    </div>
+
+
+    <div id="about" class="screen">
+      <h2 class="display-2 text-center text-white pt-5">About</h2>
+      <hr>
+      <div class="d-flex justify-content-center">
+        <div class="w-50 d-flex flex-column pt-5">
+          <h4 class="display-4 text-center text-white pt-4">
+            Created by:
+            <br>
+            Stuart Hopkins
+            <br>
+            <br>
+            Created for:
+            <br>
+            cs5410
+            <br>
+            ~
+            <br>
+            Game Dev
+          </h4>
+        </div>
+      </div>
+
+      <button class="btn w-100 btn-secondary mt-5" onClick="navigate('main-menu');">Main Menu</button>"
+    </div>
+
+
+    <div id="level-selector" class="screen">
+      <h1 class="display-2 text-center text-white pt-5">Maze Select</h1>
+      <hr>
+      <div class="d-flex justify-content-center">
+        <div class="w-50 d-flex flex-column pt-5">
+          <button class="btn btn-lg btn-success mt-4" onClick="game.level = 1; navigate('game-play');">Level 1</button>
+          <button class="btn btn-lg btn-warning mt-4" onClick="game.level = 2; navigate('game-play');">Level 2</button>
+          <button class="btn btn-lg btn-secondary mt-4" onClick="navigate('main-menu');">Back to Main Menu</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div id="game-play" class="screen">
       <div class="d-flex justify-content-around bg-secondary">
         <div class="p-2">Your Score: 
           <span id="my-score"></span>
@@ -30,8 +117,37 @@
       <button class="btn w-100 btn-secondary" onClick="navigate('main-menu');">Main Menu</button>"
     </div>
 
+    <div id="game-over" class="screen">
+      <div class="d-flex justify-content-around bg-secondary">
+        <div class="p-2">Your Score: 
+          <span id="my-prev-score"></span>
+        </div>
+        <div class="p-2">High Score: 
+          <span name="high-score"></span>
+        </div>
+        <div class="p-2">Time: 
+          <span id="prev-timer"></span>
+        </div>
+      </div>
+
+      <h1 class="display-2 text-center text-white pt-5">High Scores</h1>
+      <hr>
+
+      <div class="d-flex justify-content-center">
+        <div class="w-50 d-flex flex-column pt-5">
+          <div name="high-score-1" class="btn btn-lg btn-success mt-5">Unclaimed</div>
+          <div name="high-score-2" class="btn btn-lg btn-primary mt-4">Unclaimed</div>
+          <div name="high-score-3" class="btn btn-lg btn-warning mt-4">Unclaimed</div>
+          <div name="high-score-4" class="btn btn-lg btn-danger mt-4 mb-5">Unclaimed</div>
+        </div>
+      </div>
+
+      <button class="btn w-100 btn-secondary mt-5" onClick="navigate('main-menu');">Main Menu</button>"
+    </div>
+
   </div>
 
+  <script src="./script/navigation.js"></script>
   <script src="./script/random.js"></script>
   <script src="./script/particle-system.js"></script>
   <script src="./script/particle-system-linear.js"></script>

@@ -59,6 +59,34 @@ function ParticleSystem(graphics, spec) {
         }
     };
 
+
+    that.blowUp = function(elapsedTime, center, makeNew) {
+        let keepMe = [];
+        for (let particle = 0; particle < particles.length; particle++) {
+            if (particles[particle].update(elapsedTime)) {
+                keepMe.push(particles[particle]);
+            }
+        }
+        particles = keepMe;
+
+        if(makeNew) {
+            for (let particle = 0; particle < 15; particle++) {
+                let size = Math.abs(Random.nextGaussian(spec.size.mean, spec.size.stdev));
+                let p = create({
+                    image: spec.image,
+                    center: center,
+                    size: {x: size, y: size},
+                    rotation: 0,
+                    speed: Math.abs(Random.nextGaussian(spec.speed.mean, spec.speed.stdev)),
+                    direction: Random.nextCircleVector(),
+                    lifetime: Random.nextGaussian(spec.lifetime.mean, spec.lifetime.stdev),
+                });
+                particles.push(p);
+            }
+        }
+    };
+
+
     that.render = function() {
         for (let p = particles.length - 1; p >= 0; p--) {
             particles[p].draw();

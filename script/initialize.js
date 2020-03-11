@@ -10,6 +10,7 @@ window.addEventListener('keyup', function(event) {
 });
 
 let game = {
+  route: 'main-menu',
   // ------------- Canvas --------------
   gameHeight: 1024,
   gameWidth: 1024,
@@ -32,7 +33,12 @@ let game = {
   imgRocket: './assets/rocket.png',
 };
 
-let newGame = (game) => {
+function newGame() {
+  if(game.terrain) {
+    delete game.terrain;
+    context.clearRect(0, 0, canvas.width, canvas.height);
+  }
+
   game.terrain = game.createTerrain(game);
   game.rocket = game.createRocket(game.gameWidth / 2, 100, game.imgRocket, game.gravityAcc, context);
   game.gameLoop.start();

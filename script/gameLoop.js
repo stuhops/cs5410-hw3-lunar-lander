@@ -1,5 +1,6 @@
 game.gameLoop = function() {
   let lastTime = performance.now();
+  let requestFrame = true;
 
   function processInput() {
     game.rocket.setThrust(false);
@@ -20,6 +21,7 @@ game.gameLoop = function() {
 
 
   function update(elapsedTime) {
+    console.log(elapsedTime);
     game.rocket.update(elapsedTime);
 
     let terrain = game.terrain.terrainMap;
@@ -38,6 +40,7 @@ game.gameLoop = function() {
         }
         else {
           console.log('BLOW UP');
+          game.rocket.startBlowUp();
         }
         game.gameOver = true;
 
@@ -64,18 +67,25 @@ game.gameLoop = function() {
     update(elapsedTime);
     render(elapsedTime);
 
-    if(!game.gameOver) {
+    if(!game.gameOver && requestFrame) {
       lastTime = time;
       requestAnimationFrame(gameLoop);
     }
   }
 
   function startGameLoop() {
+    // game.rocket.startBlowUp();
     lastTime = performance.now();
+    requestFrame = true;
     requestAnimationFrame(gameLoop);
+  }
+
+  function stopGameLoop() {
+    requestFrame = false;
   }
 
   return {
     start: startGameLoop,
+    stop: stopGameLoop,
   }
 }();
