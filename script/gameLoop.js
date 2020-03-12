@@ -21,29 +21,29 @@ game.gameLoop = function() {
 
 
   function update(elapsedTime) {
-    console.log(elapsedTime);
-    game.rocket.update(elapsedTime);
+    game.gameOver = !game.rocket.update(elapsedTime);
 
     let terrain = game.terrain.terrainMap;
     let center = game.rocket.getCenter();
-    for(let i = 0; i < terrain.length - 1; i++) {
-      if(game.collision.lineCircleIntersection(
-        terrain[i], 
-        terrain[i+1], 
-        {
-          center: center,
-          radius: game.rocket.getCollisionRadius(),
-        }
-      )) {
-        if(terrain[i].landingZone) {
-          console.log('WINNER');
-        }
-        else {
-          console.log('BLOW UP');
-          game.rocket.startBlowUp();
-        }
-        game.gameOver = true;
+    if(!game.rocket.isBlowUp()) {
+      for(let i = 0; i < terrain.length - 1; i++) {
+        if(game.collision.lineCircleIntersection(
+          terrain[i], 
+          terrain[i+1], 
+          {
+            center: center,
+            radius: game.rocket.getCollisionRadius(),
+          }
+        )) {
+          if(terrain[i].landingZone) {
+            console.log('WINNER');
+          }
+          else {
+            console.log('BLOW UP');
+            game.rocket.startBlowUp();
+          }
 
+        }
       }
     }
 

@@ -84,6 +84,7 @@ game.createTerrain = (game) => {
     context.lineWidth = 6;
     context.moveTo(0, game.gameHeight);
 
+    // TODO: THIS IS WHAT IS SLOWING DOWN THE RENDERING PROCESS
     for(let i = 0; i < terrain.map.length; i++) {
       context.lineTo(terrain.map[i].x, terrain.map[i].y);
     }

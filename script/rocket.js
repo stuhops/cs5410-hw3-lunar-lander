@@ -73,9 +73,10 @@ game.createRocket = (centerX, centerY, imgSrc, gravityDelta, context) => {
     }
     else {
       rocket.blowUp.timer -= elapsedTime;
-      rocket.blowUp.vis.blowUp(elapsedTime, rocket.center, rocket.blowUp.timer > 0);
+      rocket.blowUp.vis.update(elapsedTime);
       
       if(rocket.blowUp.timer < 0) return false;
+      else return true;
 
     }
   }
@@ -94,11 +95,11 @@ game.createRocket = (centerX, centerY, imgSrc, gravityDelta, context) => {
 
   function startBlowUp() {
     rocket.blowUp.bool = true;
-    rocket.blowUp.vis = ParticleSystem(game.graphics, {
+    rocket.blowUp.vis = ParticleSystemCircular(game.graphics, {
       image: './assets/fire.png',
-      center: {x: centerX, y: centerY},
+      center: rocket.center,
       size: {mean: 15, stdev: 5},
-      speed: { mean: 0, stdev: 0.002},
+      speed: { mean: 0, stdev: 0.2},
       lifetime: { mean: 500, stdev: 100}
     });
   }
@@ -113,6 +114,7 @@ game.createRocket = (centerX, centerY, imgSrc, gravityDelta, context) => {
     // -------------------------------  Getters -------------------------------- 
     getCenter: () => rocket.center,
     getCollisionRadius: () => Math.max(rocket.width / 2, rocket.height / 2),
+    isBlowUp: () => rocket.blowUp.bool,
 
     // -------------------------------- Setters -------------------------------- 
     setThrust: setThrust,
