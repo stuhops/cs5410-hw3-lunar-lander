@@ -2,6 +2,13 @@ game.gameLoop = function() {
   let lastTime = performance.now();
   let requestFrame = true;
 
+  function updateRocketStats() {
+    let stats = game.rocket.getStats();
+    // document.getElementById("fuel").innerHTML = stats.fuel.toFixed();
+    document.getElementById("vert-speed").innerHTML = stats.vertSpeed.toFixed(2) + ' m/s';
+    document.getElementById("angle").innerHTML = stats.angle.toFixed(2) + ' degrees';
+  }
+
   function processInput() {
     game.rocket.setThrust(false);
     game.rocket.setRotate(0);
@@ -22,6 +29,7 @@ game.gameLoop = function() {
 
   function update(elapsedTime) {
     game.gameOver = !game.rocket.update(elapsedTime);
+    updateRocketStats();
 
     let terrain = game.terrain.terrainMap;
     let center = game.rocket.getCenter();
@@ -39,7 +47,6 @@ game.gameLoop = function() {
             console.log('WINNER');
           }
           else {
-            console.log('BLOW UP');
             game.rocket.startBlowUp();
           }
 
