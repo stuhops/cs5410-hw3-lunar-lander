@@ -82,6 +82,7 @@ game.createTerrain = (game) => {
   function render(context) { 
     context.strokeStyle = 'rgb(255, 255, 255)';
     context.lineWidth = 6;
+    context.beginPath();
     context.moveTo(0, game.gameHeight);
 
     // TODO: THIS IS WHAT IS SLOWING DOWN THE RENDERING PROCESS

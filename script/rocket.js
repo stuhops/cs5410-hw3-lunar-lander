@@ -16,6 +16,10 @@ game.createRocket = (centerX, centerY, imgSrc, gravityDelta, context) => {
     x: 0,
     y: 0,
   };
+  rocket.fuel = {
+    percent: 100,
+    dec: .01,
+  }
   rocket.thrust = false;
   rocket.thrustVis = ParticleSystem(game.graphics, {
     image: './assets/fire.png',
@@ -42,6 +46,8 @@ game.createRocket = (centerX, centerY, imgSrc, gravityDelta, context) => {
     if(rocket.thrust) {
       let acc = rocket.gravity * 3;
       
+      rocket.fuel.percent -= elapsedTime * rocket.fuel.dec;
+
       rocket.velocity.x -= elapsedTime * acc * Math.cos(rocket.angle);
       rocket.velocity.y -= elapsedTime * acc * Math.sin(rocket.angle);
     }
@@ -115,9 +121,9 @@ game.createRocket = (centerX, centerY, imgSrc, gravityDelta, context) => {
     getCenter: () => rocket.center,
     getCollisionRadius: () => Math.max(rocket.width / 2, rocket.height / 2),
     getStats: () => {return {
-        vertSpeed: rocket.velocity.y, 
-        angle: (rocket.angle * 57.2958) % 360,
-        fuel: rocket.fuel,
+        vertSpeed: -rocket.velocity.y, 
+        angle: (360 + (rocket.angle * 57.2958) % 360) % 360,
+        fuel: rocket.fuel.percent,
     }},
     isBlowUp: () => rocket.blowUp.bool,
 
