@@ -2,20 +2,6 @@ game.gameLoop = function() {
   let lastTime = performance.now();
   let requestFrame = true;
 
-  function updateRocketStats() {
-    let stats = game.rocket.getStats();
-
-    let fuel = document.getElementById("fuel");
-    fuel.innerHTML = stats.fuel.toFixed();
-
-    let vertSpeed = document.getElementById("vert-speed");
-    vertSpeed.innerHTML = stats.vertSpeed.toFixed(2) + ' m/s';
-
-    let angle = document.getElementById("angle");
-    angle.innerHTML = stats.angle.toFixed(2) + ' degrees';
-    
-  }
-
   function processInput() {
     game.rocket.setThrust(false);
     game.rocket.setRotate(0);
@@ -36,7 +22,7 @@ game.gameLoop = function() {
 
   function update(elapsedTime) {
     game.gameOver = !game.rocket.update(elapsedTime);
-    updateRocketStats();
+    updateDomStats();
 
     let terrain = game.terrain.terrainMap;
     let center = game.rocket.getCenter();
