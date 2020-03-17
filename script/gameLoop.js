@@ -37,8 +37,9 @@ game.gameLoop = function() {
           }
         )) {
           if(terrain[i].landingZone && landable) {
-            console.log('WINNER');
+            manageHighScores(Number(document.getElementById('my-score').innerHTML));
             game.rocket.stop();
+            break;
           }
           else {
             game.rocket.startBlowUp();
@@ -68,17 +69,19 @@ game.gameLoop = function() {
     update(elapsedTime);
     render(elapsedTime);
 
+    lastTime = time;
     if(!game.gameOver && requestFrame) {
-      lastTime = time;
       requestAnimationFrame(gameLoop);
     }
     else {
-      gameOver();
+      renderNextLevelCountdown();
+      gameOver(elapsedTime);
     }
   }
 
   function startGameLoop() {
     // game.rocket.startBlowUp();
+    game.gameOverTimer = 3000;
     lastTime = performance.now();
     requestFrame = true;
     requestAnimationFrame(gameLoop);
@@ -88,14 +91,25 @@ game.gameLoop = function() {
     requestFrame = false;
   }
 
-  function gameOver() {
-    manageHighScores(Number(document.getElementById('my-score').innerHTML));
+  function gameOver(elapsedTime) {
+    if(game.gameOverTimer === 3000) {
+    }
 
-    document.getElementById('my-prev-score').innerHTML = document.getElementById('my-score').innerHTML;
+    game.gameOverTimer -= elapsedTime;
+    if(game.level != game.levels && game.gameOverTimer > 0) {
+      requestAnimationFrame(gameLoop);
+    }
+    else {
+      document.getElementById('my-prev-score').innerHTML = document.getElementById('my-score').innerHTML;
+      document.getElementById('my-score').innerHTML = '100';
+      navigate('game-over');
+    }
 
-    document.getElementById('my-score').innerHTML = '100';
+  }
 
-    navigate('game-over');
+  function renderNextLevelCountdown() {
+    context.font = 'italic 64px sans-serif';
+    context.fillText('Next Level in: ' + ((1000 + game.gameOverTimer) * .001).toFixed(), 10, 50);
   }
 
   return {

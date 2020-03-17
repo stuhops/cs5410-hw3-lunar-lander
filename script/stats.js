@@ -43,7 +43,6 @@ function setVertSpeed(stats) {
   let vertSpeed = stats.vertSpeed.toFixed(2);
   let landable = false;
   if(vertSpeed > -2) {
-    // TODO: Make the ship stop thrusting
     document.getElementById("vert-speed-div").style.color = 'green';
     landable = true;
   }

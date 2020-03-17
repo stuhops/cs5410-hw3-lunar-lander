@@ -1,3 +1,10 @@
+// TODO: Make it 5 High scores instead of 4
+// TODO: Sound effect on thrust
+// TODO: Sound effect on blowUp
+// TODO: Sound effect on win
+// TODO: Create terrain correctly
+
+
 let canvas = document.getElementById('canvas-main');
 let context = canvas.getContext('2d');
 
@@ -19,6 +26,7 @@ let game = {
 
   // ---------- Game State -------------
   level: 1,
+  levels: 2,
   gameOver: false,
   score: 100,
 
@@ -26,7 +34,7 @@ let game = {
   gravityAcc: 0.001,
 
   // --------- High Scores -------------
-  highScores: ['Unclaimed', 'Unclaimed', 'Unclaimed', 'Unclaimed'],
+  highScores: ['Unclaimed', 'Unclaimed', 'Unclaimed', 'Unclaimed', 'Unclaimed'],
 
 
   // ----------- Controls --------------
@@ -39,7 +47,7 @@ let game = {
 };
 
 if(JSON.parse(window.localStorage.getItem('lunar-lander-high-scores')) !== null)
-  game.highScores = JSON.parse(window.localStorage.getItem('lunar-lander-high-scores'))
+  game.highScores = JSON.parse(window.localStorage.getItem('lunar-lander-high-scores'));
 manageHighScores();
 
 function newGame() {
