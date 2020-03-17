@@ -127,7 +127,7 @@ game.createRocket = (centerX, centerY, imgSrc, gravityDelta, context) => {
     getCenter: () => rocket.center,
     getCollisionRadius: () => Math.max(rocket.width / 2, rocket.height / 2),
     getStats: () => {return {
-        vertSpeed: -rocket.velocity.y, 
+        vertSpeed: - rocket.velocity.y * 3, 
         angle: (360 + (rocket.angle * 57.2958 - 90) % 360) % 360,
         fuel: rocket.fuel.percent,
     }},
