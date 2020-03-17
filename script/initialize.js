@@ -1,6 +1,3 @@
-// TODO: Sound effect on thrust
-// TODO: Sound effect on blowUp
-// TODO: Sound effect on win
 // TODO: Create terrain correctly
 
 
@@ -45,7 +42,7 @@ let game = {
   audio: {
     thrust: './assets/thrust.mp3',
     blowUp: './assets/explosion.mp3',
-    win: '',
+    win: './assets/win.mp3',
   },
 
   // ------------ Images ---------------

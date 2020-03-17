@@ -37,6 +37,8 @@ game.gameLoop = function() {
           }
         )) {
           if(terrain[i].landingZone && landable) {
+            let winAudio = new Audio(game.audio.win);
+            winAudio.play();
             manageHighScores(Number(document.getElementById('my-score').innerHTML));
             game.rocket.stop();
             break;
