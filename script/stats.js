@@ -2,6 +2,7 @@ function updateDomStats() {
   let stats = game.rocket.getStats();
 
   setFuel(stats);
+  setScore(stats);
   let speedBool = setVertSpeed(stats);
   let angleBool = setAngle(stats);
   let landable = speedBool && angleBool;
@@ -13,7 +14,6 @@ function setFuel(stats) {
   let fuel = document.getElementById("fuel");
   let fuel_stat = stats.fuel.toFixed();
   if(fuel_stat < 0) {
-    // TODO: Make the ship stop thrusting
     fuel_stat = 'Empty!';
     document.getElementById("fuel-div").style.color = 'white';
     game.rocket.setNoThrust(true);
@@ -23,6 +23,18 @@ function setFuel(stats) {
   }
 
   fuel.innerHTML = fuel_stat;
+}
+
+
+function setScore(stats) {
+  let score = document.getElementById("my-score");
+  let fuel_stat = stats.fuel.toFixed();
+  if(stats.blowUp || fuel_stat < 0) {
+    score.innerHTML = '0';
+  }
+  else {
+    score.innerHTML = fuel_stat;
+  }
 }
 
 

@@ -20,6 +20,7 @@ let game = {
   // ---------- Game State -------------
   level: 1,
   gameOver: false,
+  score: 100,
 
   // ---------- Game Vars --------------
   gravityAcc: 0.001,
