@@ -1,4 +1,3 @@
-// TODO: Make it 5 High scores instead of 4
 // TODO: Sound effect on thrust
 // TODO: Sound effect on blowUp
 // TODO: Sound effect on win
@@ -42,6 +41,13 @@ let game = {
   left: 'ArrowLeft',
   right: 'ArrowRight',
 
+  // ------------ Audio ----------------
+  audio: {
+    thrust: './assets/thrust.mp3',
+    blowUp: '',
+    win: '',
+  },
+
   // ------------ Images ---------------
   imgRocket: './assets/rocket.png',
 };
@@ -53,6 +59,7 @@ manageHighScores();
 function newGame() {
   if(game.terrain) {
     delete game.terrain;
+    delete game.rocket;
     context.clearRect(0, 0, canvas.width, canvas.height);
   }
 

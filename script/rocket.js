@@ -39,6 +39,10 @@ game.createRocket = (centerX, centerY, imgSrc, gravityDelta, context) => {
     bool: false,
     timer: 3000,
   }
+  rocket.audio = {
+    thrust: new Audio(game.audio.thrust),
+    // blowUp: new Audio(game.audio.blowUp),
+  } 
 
 
 
@@ -50,11 +54,15 @@ game.createRocket = (centerX, centerY, imgSrc, gravityDelta, context) => {
   function thrust_(elapsedTime) {
     if(rocket.thrust) {
       let acc = rocket.gravity * 3;
+      rocket.audio.thrust.play();
       
       rocket.fuel.percent -= elapsedTime * rocket.fuel.dec;
 
       rocket.velocity.x -= elapsedTime * acc * Math.cos(rocket.angle);
       rocket.velocity.y -= elapsedTime * acc * Math.sin(rocket.angle);
+    }
+    else {
+      rocket.audio.thrust.pause();
     }
   }
 
@@ -88,6 +96,7 @@ game.createRocket = (centerX, centerY, imgSrc, gravityDelta, context) => {
       return true;
     }
     else if(rocket.stopped.bool) {
+      rocket.audio.thrust.pause();
       rocket.stopped.timer -= elapsedTime;
       rocket.thrustVis.update(elapsedTime, rocket.center, rocket.angle, rocket.thrust);
 
@@ -95,6 +104,7 @@ game.createRocket = (centerX, centerY, imgSrc, gravityDelta, context) => {
       else return true;
     }
     else {
+      rocket.audio.thrust.pause();
       rocket.blowUp.timer -= elapsedTime;
       rocket.blowUp.vis.update(elapsedTime);
       

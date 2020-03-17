@@ -41,7 +41,7 @@ game.gameLoop = function() {
             game.rocket.stop();
             break;
           }
-          else {
+          else if (requestFrame) {
             game.rocket.startBlowUp();
           }
 
@@ -50,7 +50,7 @@ game.gameLoop = function() {
     }
 
     if(game.rocket.getCenter().y > 1024) {
-      game.gameOver = true;
+      game.rocket.startBlowUp();
     }
   }
 
@@ -80,7 +80,6 @@ game.gameLoop = function() {
   }
 
   function startGameLoop() {
-    // game.rocket.startBlowUp();
     game.gameOverTimer = 3000;
     lastTime = performance.now();
     requestFrame = true;
@@ -102,9 +101,15 @@ game.gameLoop = function() {
     else {
       document.getElementById('my-prev-score').innerHTML = document.getElementById('my-score').innerHTML;
       document.getElementById('my-score').innerHTML = '100';
-      navigate('game-over');
     }
 
+    if(game.level != game.levels) {
+      game.level++;
+      navigate('game-play')
+    }
+    else {
+      navigate('game-over');
+    }
   }
 
   function renderNextLevelCountdown() {
