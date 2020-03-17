@@ -22,11 +22,11 @@ game.gameLoop = function() {
 
   function update(elapsedTime) {
     game.gameOver = !game.rocket.update(elapsedTime);
-    updateDomStats();
+    let landable = updateDomStats();
 
     let terrain = game.terrain.terrainMap;
     let center = game.rocket.getCenter();
-    if(!game.rocket.isBlowUp()) {
+    if(!game.rocket.isBlowUp() && !game.rocket.isStopped()) {
       for(let i = 0; i < terrain.length - 1; i++) {
         if(game.collision.lineCircleIntersection(
           terrain[i], 
@@ -36,8 +36,9 @@ game.gameLoop = function() {
             radius: game.rocket.getCollisionRadius(),
           }
         )) {
-          if(terrain[i].landingZone) {
+          if(terrain[i].landingZone && landable) {
             console.log('WINNER');
+            game.rocket.stop();
           }
           else {
             game.rocket.startBlowUp();

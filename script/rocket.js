@@ -22,6 +22,10 @@ game.createRocket = (centerX, centerY, imgSrc, gravityDelta, context) => {
   }
   rocket.thrust = false;
   rocket.noThrust = false;
+  rocket.stopped = {
+    bool: false,
+    timer: 3000,
+  };
   rocket.thrustVis = ParticleSystem(game.graphics, {
     image: './assets/fire.png',
     center: {x: centerX, y: centerY},
@@ -71,7 +75,7 @@ game.createRocket = (centerX, centerY, imgSrc, gravityDelta, context) => {
 
 
   function update(elapsedTime) {
-    if(!rocket.blowUp.bool) {
+    if(!rocket.blowUp.bool && !rocket.stopped.bool) {
       rocket.velocity.y += elapsedTime * rocket.gravity; 
 
       rotate_(elapsedTime);
@@ -82,6 +86,13 @@ game.createRocket = (centerX, centerY, imgSrc, gravityDelta, context) => {
       rocket.center.x += rocket.velocity.x; 
       rocket.center.y += rocket.velocity.y; 
       return true;
+    }
+    else if(rocket.stopped.bool) {
+      rocket.stopped.timer -= elapsedTime;
+      rocket.thrustVis.update(elapsedTime, rocket.center, rocket.angle, rocket.thrust);
+
+      if(rocket.stopped.timer < 0) return false;
+      else return true;
     }
     else {
       rocket.blowUp.timer -= elapsedTime;
@@ -116,22 +127,31 @@ game.createRocket = (centerX, centerY, imgSrc, gravityDelta, context) => {
     });
   }
 
+
+  function stop() {
+    rocket.stopped.bool = true;
+    setNoThrust();
+  }
+
   
   return {
     // ------------------------------- Functions -------------------------------
     update: update,
     render: render,
     startBlowUp: startBlowUp,
+    stop: stop,
 
     // -------------------------------  Getters -------------------------------- 
     getCenter: () => rocket.center,
     getCollisionRadius: () => Math.max(rocket.width / 2, rocket.height / 2),
     getStats: () => {return {
-        vertSpeed: - rocket.velocity.y * 3, 
+        // vertSpeed: - rocket.velocity.y * 3, 
+        vertSpeed: - rocket.velocity.y, 
         angle: (360 + (rocket.angle * 57.2958 - 90) % 360) % 360,
         fuel: rocket.fuel.percent,
     }},
     isBlowUp: () => rocket.blowUp.bool,
+    isStopped: () => rocket.stopped.bool,
 
     // -------------------------------- Setters -------------------------------- 
     setThrust: setThrust,
