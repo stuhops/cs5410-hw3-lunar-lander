@@ -40,9 +40,7 @@ let game = {
 
 if(JSON.parse(window.localStorage.getItem('lunar-lander-high-scores')) !== null)
   game.highScores = JSON.parse(window.localStorage.getItem('lunar-lander-high-scores'))
-for(let i = 0; i < document.getElementsByName('high-score').length; i++) {
-    document.getElementsByName(`high-score`)[i].innerHTML = game.highScores[0];
-}
+manageHighScores();
 
 function newGame() {
   if(game.terrain) {

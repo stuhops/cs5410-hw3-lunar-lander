@@ -92,10 +92,8 @@ game.gameLoop = function() {
     manageHighScores(Number(document.getElementById('my-score').innerHTML));
 
     document.getElementById('my-prev-score').innerHTML = document.getElementById('my-score').innerHTML;
-    document.getElementById('prev-timer').innerHTML = document.getElementById('timer').innerHTML;
 
-    document.getElementById('my-score').innerHTML = '1000';
-    document.getElementById('timer').innerHTML = '0';
+    document.getElementById('my-score').innerHTML = '100';
 
     navigate('game-over');
   }
