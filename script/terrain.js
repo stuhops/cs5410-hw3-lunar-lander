@@ -80,12 +80,12 @@ game.createTerrain = (game) => {
 
 
   function render(context) { 
-    context.strokeStyle = 'rgb(255, 255, 255)';
+    context.strokeStyle = 'white';
+    context.fillStyle = 'black';
     context.lineWidth = 6;
     context.beginPath();
     context.moveTo(0, game.gameHeight);
 
-    // TODO: THIS IS WHAT IS SLOWING DOWN THE RENDERING PROCESS
     for(let i = 0; i < terrain.map.length; i++) {
       context.lineTo(terrain.map[i].x, terrain.map[i].y);
     }
@@ -94,6 +94,7 @@ game.createTerrain = (game) => {
 
     context.closePath();
     context.stroke();
+    context.fill();
   }
 
   return {
