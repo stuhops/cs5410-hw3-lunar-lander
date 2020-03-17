@@ -44,7 +44,7 @@ let game = {
   // ------------ Audio ----------------
   audio: {
     thrust: './assets/thrust.mp3',
-    blowUp: '',
+    blowUp: './assets/explosion.mp3',
     win: '',
   },
 

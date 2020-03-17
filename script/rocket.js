@@ -41,7 +41,7 @@ game.createRocket = (centerX, centerY, imgSrc, gravityDelta, context) => {
   }
   rocket.audio = {
     thrust: new Audio(game.audio.thrust),
-    // blowUp: new Audio(game.audio.blowUp),
+    blowUp: new Audio(game.audio.blowUp),
   } 
 
 
@@ -127,6 +127,7 @@ game.createRocket = (centerX, centerY, imgSrc, gravityDelta, context) => {
 
 
   function startBlowUp() {
+    rocket.audio.blowUp.play();
     rocket.blowUp.bool = true;
     rocket.blowUp.vis = ParticleSystemCircular(game.graphics, {
       image: './assets/fire.png',
