@@ -7,7 +7,7 @@ game.createRocket = (centerX, centerY, imgSrc, gravityDelta, context) => {
     x: centerX,
     y: centerY,
   };
-  rocket.angle = 1/2 * Math.PI;
+  rocket.angle = 1 * Math.PI;
   rocket.rotate = {
     direction: 0,
     speed: .001 * Math.PI,

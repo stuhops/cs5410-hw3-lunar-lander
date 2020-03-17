@@ -25,6 +25,10 @@ let game = {
   // ---------- Game Vars --------------
   gravityAcc: 0.001,
 
+  // --------- High Scores -------------
+  highScores: ['Unclaimed', 'Unclaimed', 'Unclaimed', 'Unclaimed'],
+
+
   // ----------- Controls --------------
   up: 'ArrowUp',
   left: 'ArrowLeft',
@@ -33,6 +37,12 @@ let game = {
   // ------------ Images ---------------
   imgRocket: './assets/rocket.png',
 };
+
+if(JSON.parse(window.localStorage.getItem('lunar-lander-high-scores')) !== null)
+  game.highScores = JSON.parse(window.localStorage.getItem('lunar-lander-high-scores'))
+for(let i = 0; i < document.getElementsByName('high-score').length; i++) {
+    document.getElementsByName(`high-score`)[i].innerHTML = game.highScores[0];
+}
 
 function newGame() {
   if(game.terrain) {

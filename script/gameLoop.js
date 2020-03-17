@@ -72,6 +72,9 @@ game.gameLoop = function() {
       lastTime = time;
       requestAnimationFrame(gameLoop);
     }
+    else {
+      gameOver();
+    }
   }
 
   function startGameLoop() {
@@ -83,6 +86,18 @@ game.gameLoop = function() {
 
   function stopGameLoop() {
     requestFrame = false;
+  }
+
+  function gameOver() {
+    manageHighScores(Number(document.getElementById('my-score').innerHTML));
+
+    document.getElementById('my-prev-score').innerHTML = document.getElementById('my-score').innerHTML;
+    document.getElementById('prev-timer').innerHTML = document.getElementById('timer').innerHTML;
+
+    document.getElementById('my-score').innerHTML = '1000';
+    document.getElementById('timer').innerHTML = '0';
+
+    navigate('game-over');
   }
 
   return {
