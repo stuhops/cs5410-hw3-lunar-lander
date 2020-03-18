@@ -54,6 +54,16 @@ if(JSON.parse(window.localStorage.getItem('lunar-lander-high-scores')) !== null)
   game.highScores = JSON.parse(window.localStorage.getItem('lunar-lander-high-scores'));
 manageHighScores();
 
+if(JSON.parse(window.localStorage.getItem('lunar-lander-controls')) !== null) {
+  game.up = JSON.parse(window.localStorage.getItem('lunar-lander-controls')).up;
+  game.left = JSON.parse(window.localStorage.getItem('lunar-lander-controls')).left;
+  game.right = JSON.parse(window.localStorage.getItem('lunar-lander-controls')).right;
+}
+
+document.getElementById('control-up').innerHTML = game.up;
+document.getElementById('control-left').innerHTML = game.left;
+document.getElementById('control-right').innerHTML = game.right;
+
 function newGame() {
   if(game.terrain) {
     delete game.terrain;

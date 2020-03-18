@@ -38,15 +38,17 @@ game.gameLoop = function() {
         )) {
           if(terrain[i].landingZone && landable) {
             let winAudio = new Audio(game.audio.win);
+            game.won = true;
             winAudio.play();
             manageHighScores(Number(document.getElementById('my-score').innerHTML));
             game.rocket.stop();
             break;
           }
           else if (requestFrame) {
+            game.won = false;
             game.rocket.startBlowUp();
+            break;
           }
-
         }
       }
     }
@@ -93,9 +95,6 @@ game.gameLoop = function() {
   }
 
   function gameOver(elapsedTime) {
-    if(game.gameOverTimer === 3000) {
-    }
-
     game.gameOverTimer -= elapsedTime;
     if(game.level != game.levels && game.gameOverTimer > 0) {
       requestAnimationFrame(gameLoop);
@@ -105,9 +104,17 @@ game.gameLoop = function() {
       document.getElementById('my-score').innerHTML = '100';
     }
 
-    if(game.level != game.levels) {
-      game.level++;
-      navigate('game-play')
+    if(game.won) {
+      if(game.gameOverTimer < 0 && game.level != game.levels) {
+        if(!game.won) {
+          navigate('game-over');
+        }
+        game.level++;
+        navigate('game-play')
+      }
+      else if(game.level == game.levels) {
+        navigate('game-over');
+      }
     }
     else {
       navigate('game-over');
@@ -116,7 +123,7 @@ game.gameLoop = function() {
 
   function renderNextLevelCountdown() {
     context.font = 'italic 64px sans-serif';
-    context.fillText('Next Level in: ' + ((1000 + game.gameOverTimer) * .001).toFixed(), 10, 50);
+    context.fillText('Next Level in: ' + ((game.gameOverTimer) * .001).toFixed(), 10, 50);
   }
 
   return {
